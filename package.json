@@ -4,7 +4,7 @@
   "author": "MBPritz",
   "description": "Weather App",
   "engines": {
-    "node": "14 || 15 || 16",
+    "node": ">= 14",
     "npm": ">=6"
   },
   "private": true,
