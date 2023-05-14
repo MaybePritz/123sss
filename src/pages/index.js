@@ -54,7 +54,6 @@ function Page({ data }) {
 };
 
 export async function getServerSideProps(context) {
-    const delay = (s) => new Promise(resolve => setTimeout(resolve, s))
     const { req } = context;
     if (req.headers.host) {
         console.log(req.headers.host);
@@ -63,6 +62,7 @@ export async function getServerSideProps(context) {
             headers: {
                 "Content-Type": "application/json",
             },
+            body: {location: ''}
         });
         const data = await res.json();
 
