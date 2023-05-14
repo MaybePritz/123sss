@@ -1,5 +1,7 @@
 import { useAppController, setFixedPluginStatus } from "@/context";
 
+import Navbar_Skeleton from "../skeletons/main/navbar";
+
 import Search from "../ui/search";
 import Breadcrumbs from "../ui/breadcrumbs";
 import classNames from "classnames";
@@ -12,6 +14,8 @@ export default function Navbar({ data }) {
   const halderFixed = () => {
     setFixedPluginStatus(dispatch, !fixedStatus || false);
   };
+
+  if(!data) return <Navbar_Skeleton />
 
   return (
     <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start">

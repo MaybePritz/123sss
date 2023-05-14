@@ -1,9 +1,8 @@
-import Search from "../ui/search";
-import NavbarAlert from "../ui/NavbarAlert";
-import Breadcrumbs from "../ui/breadcrumbs";
+import Search from "../../ui/search";
+import NavbarAlert from "../../ui/NavbarAlert";
 import classNames from "classnames";
 
-export default function Navbar() {
+export default function Navbar_Skeleton() {
   return (
     <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start">
       <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
