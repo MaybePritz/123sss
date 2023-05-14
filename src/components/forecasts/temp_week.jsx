@@ -13,26 +13,11 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-export default function TempWeek({ place }) {
+export default function TempWeek({ data, place }) {
   const [weather, setWeather] = useState(null);
   const [weatherDate, setWeatherDate] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("../api/weather/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ location: place }),
-    })
-      .then((res) => res.json())
-      .then((weather) => {
-        setWeather(weather);
-        setLoading(false);
-      });
-  }, []);
 
   Chart.register(
     CategoryScale,
@@ -85,30 +70,11 @@ export default function TempWeek({ place }) {
     },
   };
 
-  if (isLoading)
-    return (
-      <div className="w-full max-w-full px-3 mt-6 flex-0 lg:w-8/12">
-        <div className=" flex flex-col min-w-0 overflow-hidden break-words h-full  bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
-          <div className="p-4 pb-0 border-black/12.5 rounded-t-2xl border-b-0 border-solid">
-            <h5 className="font-bold dark:text-white text-transparent bg-gray-300 rounded-lg mb-1">Температура</h5>
-            <p className="mb-0  font-semibold leading-normal capitalize text-sm text-transparent bg-gray-300 rounded-lg">
-              Ср. температура{" "}
-              15
-            </p>
-          </div>
-          <div className="flex-auto p-0 w-full text-transparent bg-gray-300 rounded-lg m-3">
-            2
-          </div>
-        </div>
-      </div>
-    );
-  if (!weather) return <p>No weather data</p>;
-
   let ChartLabels = [];
   let ChartData = [];
   let avg_temp = 0;
 
-  const TempChart = weather.forecast.forecastday.map((day) => {
+  data.forecast.forecastday.map((day) => {
     avg_temp += day.day.avgtemp_c;
     const weekday = new Date(Number(day.date_epoch) * 1000).toLocaleString(
       "ru-Ru",
@@ -142,7 +108,7 @@ export default function TempWeek({ place }) {
             <h5 className="mb-0 font-bold dark:text-white">Температура</h5>
             <p className="mb-0  font-semibold leading-normal capitalize text-sm">
               Ср. температура{" "}
-              {Math.round(avg_temp / weather.forecast.forecastday.length)}
+              {Math.round(avg_temp / data.forecast.forecastday.length)}
             </p>
           </div>
           <div className="flex-auto p-0 w-full">

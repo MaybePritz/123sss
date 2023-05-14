@@ -1,31 +1,37 @@
-import { useAppController, setFixedPluginStatus } from "@/context";
-
 import Search from "../ui/search";
+import NavbarAlert from "../ui/NavbarAlert";
 import Breadcrumbs from "../ui/breadcrumbs";
 import classNames from "classnames";
 
-export default function Navbar({ data }) {
-  const [controller, dispatch] = useAppController();
-  const { fixedStatus, weatherAlert, sidebarStatus } = controller;
-
-
-  const halderFixed = () => {
-    setFixedPluginStatus(dispatch, !fixedStatus || false);
-  };
-
+export default function Navbar() {
   return (
     <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start">
       <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-        <Breadcrumbs
-          info={{
-            country: data.location.country,
-            city: data.location.name,
-            adress: data.location.region,
-          }}
-        />
+        <nav>
+          <ol class="flex flex-wrap items-center pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a
+                class=" text-slate-700 dark:text-white pointer-evets-none text-transparent bg-gray-300 rounded-lg"
+                href="#"
+              >
+                Russia
+              </a>
+            </li>
+            <li className="px-2">/</li>
+            <li class="text-sm capitalize leading-normal text-slate-700 dark:text-white text-transparent bg-gray-300 rounded-lg">
+              samara
+            </li>
+          </ol>
+          <h6 class="mb-0 font-bold dark:text-white text-transparent bg-gray-300 rounded-lg">
+            2
+          </h6>
+        </nav>
 
         <div class="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-
+          <NavbarAlert>
+            Завтра +23&#176;, на 3&#176; теплее, чем сегодня. Слабый ветер 3-5
+            м/с
+          </NavbarAlert>
           <Search
             placeholder={"Найти город..."}
             classes={classNames(
@@ -63,11 +69,11 @@ export default function Navbar({ data }) {
             <li class="flex items-center px-4">
               <button
                 onClick={halderFixed}
-                class="p-0 transition-all text-md ease-nav-brand text-slate-500 opacity-50 pointer-events-none"
+                class="p-0 transition-all text-md ease-nav-brand text-slate-500"
               >
                 <i class="ph-fill ph-gear-six"></i>
               </button>
-            </li> 
+            </li>
           </ul>
         </div>
       </div>

@@ -4,6 +4,7 @@ import {useRouter} from 'next/router';
 
 const preventDefault = f => e => {
   f(e);
+  e.preventDefault();
 };
 
 export default function Search({ placeholder, classes, submit}) {
