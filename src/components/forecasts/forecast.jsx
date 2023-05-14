@@ -12,7 +12,7 @@ export default function Forecast({ place }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ place: place }),
+      body: JSON.stringify({ location: place }),
     })
       .then((res) => res.json())
       .then((weather) => {

@@ -13,18 +13,18 @@ import TempWeek from "@/components/forecasts/temp_week";
 
 
 
-const Weather = () => {
+export default function Weather() {
     return (
         <WeatherLayout>
-            <Navbar place={'ryazan'}/>
+            <Navbar/>
             <div className='mx-1 md:mx-0 lg:mx-5'>
                 <div class="flex flex-wrap">
-                    <SMForecast title={'Четверг'} date={Math.floor(new Date().getTime() / 1000.0) + 24 * 60 * 60} place={'Moscow'}/>
+                    <SMForecast title={'Четверг'} date={Math.floor(new Date().getTime() / 1000.0) + 24 * 60 * 60} />
                     <SMForecast title={'Пятница'} date={Math.floor(new Date().getTime() / 1000.0) + 2 * 24 * 60 * 60} />
-                    <SMForecast title={'Суббота'} date={Math.floor(new Date().getTime() / 1000.0) + 3 * 24 * 60 * 60} />
+                    <SMForecast title={'Суббота'} date={Math.floor(new Date().getTime() / 1000.0) + 3 * 24 * 60 * 60}/>
                 </div>
                 <div className="flex flex-wrap lg:flex-nowrap mt-6 md:mt-0">
-                    <Forecast place={'Moscow'}/>
+                    <Forecast/>
                     <div class="w-full max-w-full px-3 mt-6 ml-auto xl:flex-0 shrink-0 md:mt-0 xl:w-8/12">
                         <div class="flex flex-wrap mt-6 -mx-3">
                             <ForecastDetail width={'4/12'} title={'По ощущению'} subtitle={'Градусы цельсия'} info={'feelslike_c'} />
@@ -48,4 +48,3 @@ const Weather = () => {
     );
 };
 
-export default Weather;

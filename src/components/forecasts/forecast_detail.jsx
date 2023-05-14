@@ -18,7 +18,7 @@ export default function ForecastDetail({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ place: place }),
+      body: JSON.stringify({ location: place }),
     })
       .then((res) => res.json())
       .then((weather) => {
@@ -31,7 +31,7 @@ export default function ForecastDetail({
   if (isLoading)
     return (
       <div class={`w-full max-w-full px-3 md:flex-0 shrink-0 md:w-${width}`}>
-        <div class="border-black/12.5 dark:shadow-soft-dark-xl shadow-soft-xl dark:bg-gray-950 relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white dark:bg-gray-900 bg-clip-border">
+        <div class="border-black/12.5 dark:shadow-soft-dark-xl shadow-soft-xlrelative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white dark:bg-gray-900 bg-clip-border">
           <div class="flex-auto p-6 text-center select-none animate-pulse">
             <h1 class="relative z-10 text-transparent bg-gray-300 rounded-lg">
               21

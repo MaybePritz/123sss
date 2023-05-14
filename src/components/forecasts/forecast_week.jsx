@@ -12,82 +12,232 @@ export default function WeekForecast({ place }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ place: place }),
+      body: JSON.stringify({ location: place }),
     })
       .then((res) => res.json())
       .then((weather) => {
         setWeather(weather);
-        setWeatherDate(
-          new Date(Number(weather.current.last_updated_epoch) * 1000)
-        );
         setLoading(false);
       });
   }, []);
   if (isLoading)
     return (
-      <div role="status">
-        <svg
-          aria-hidden="true"
-          class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-          viewBox="0 0 100 101"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-            fill="currentColor"
-          />
-          <path
-            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-            fill="currentFill"
-          />
-        </svg>
-        <span class="sr-only">Loading...</span>
+      <div class="w-full max-w-full px-3 mt-6 md:w-4/12 md:flex-none select-none">
+        <div class="relative flex flex-col h-full min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
+          <div class="p-6 px-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
+            <div class="flex flex-wrap -mx-3">
+              <div class="max-w-full px-3 md:w-1/2 md:flex-none ">
+                <h6 class="mb-0 dark:text-white text-transparent bg-gray-300 rounded-lg">Погода на 3 дня</h6>
+              </div>
+              <div class="flex items-center justify-end max-w-full px-3 md:w-1/2 md:flex-none text-transparent bg-gray-300 rounded-lg">
+                <i class="mr-2 ph ph-calendar-blank" aria-hidden="true"></i>
+                <small>
+                  0-0-0000
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="flex-auto p-4 pt-6">
+            <ul class="flex flex-col pl-0 mb-0 rounded-lg">
+              <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
+                <div class="flex items-center">
+                  <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-default items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75 text-transparent bg-gray-300 ">
+                    1
+                  </button>
+                  <div class="flex flex-col">
+                    <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white capitalize text-transparent bg-gray-300 rounded-lg">
+                      День недели
+                    </h6>
+                    <span class="leading-tight text-xs text-transparent bg-gray-300 rounded-lg">
+                      0{" "}
+                      январь{" "}
+                      2000
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center ">
+                  <p class="font-semibold leading-normal text-sm text-transparent bg-gray-300 rounded-lg mb-1">
+                    15&#176;
+                  </p>
+                  <p class="m-0 font-semibold leading-normal text-xs  text-transparent bg-gray-300 rounded-lg">
+                    чистата
+                  </p>
+                </div>
+              </li>
+              <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
+                <div class="flex items-center">
+                  <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-default items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75 text-transparent bg-gray-300 ">
+                    1
+                  </button>
+                  <div class="flex flex-col">
+                    <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white capitalize text-transparent bg-gray-300 rounded-lg">
+                      День недели
+                    </h6>
+                    <span class="leading-tight text-xs text-transparent bg-gray-300 rounded-lg">
+                      0{" "}
+                      январь{" "}
+                      2000
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center ">
+                  <p class="font-semibold leading-normal text-sm text-transparent bg-gray-300 rounded-lg mb-1">
+                    15&#176;
+                  </p>
+                  <p class="m-0 font-semibold leading-normal text-xs  text-transparent bg-gray-300 rounded-lg">
+                    чистата
+                  </p>
+                </div>
+              </li>
+              <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
+                <div class="flex items-center">
+                  <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-default items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75 text-transparent bg-gray-300 ">
+                    1
+                  </button>
+                  <div class="flex flex-col">
+                    <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white capitalize text-transparent bg-gray-300 rounded-lg">
+                      День недели
+                    </h6>
+                    <span class="leading-tight text-xs text-transparent bg-gray-300 rounded-lg">
+                      0{" "}
+                      январь{" "}
+                      2000
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center ">
+                  <p class="font-semibold leading-normal text-sm text-transparent bg-gray-300 rounded-lg mb-1">
+                    15&#176;
+                  </p>
+                  <p class="m-0 font-semibold leading-normal text-xs  text-transparent bg-gray-300 rounded-lg">
+                    чистата
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     );
   if (!weather) return <p>No weather data</p>;
 
+  const WeatherItems = weather.forecast.forecastday.map((day) => {
+    switch (day.day.condition.code) {
+      case 1000:
+        var icon = "ph-fill ph-sun text-yellow-500";
+        break;
+      case 1003:
+        var icon = "ph-fill ph-cloud-sun text-slate-500";
+        break;
+      case 1006:
+      case 1009:
+        var icon = "ph-fill ph-cloud text-slate-500";
+        break;
+      case 1030:
+      case 1135:
+      case 1147:
+        var icon = "ph-fill ph-cloud-fog text-slate-500";
+        break;
+      case 1063:
+      case 1072:
+      case 1150:
+      case 1153:
+      case 1168:
+      case 1171:
+      case 1180:
+      case 1183:
+      case 1186:
+      case 1189:
+      case 1192:
+      case 1195:
+      case 1198:
+      case 1201:
+        var icon = "ph-fill ph-cloud-rain text-blue-500";
+        break;
+      case 1066:
+      case 1069:
+      case 1204:
+      case 1207:
+      case 1210:
+      case 1213:
+      case 1216:
+      case 1222:
+      case 1237:
+      case 1240:
+      case 1243:
+      case 1246:
+      case 1249:
+      case 1252:
+      case 1255:
+      case 1261:
+      case 1264:
+        var icon = "ph-fill ph-cloud-snow text-slate-500";
+        break;
+      case 1087:
+      case 1273:
+      case 1276:
+      case 1279:
+      case 1282:
+        var icon = "ph-fill ph-lightning text-yellow-500";
+        break;
+      case 1114:
+      case 1117:
+        var icon = "ph-fill ph-wind text-blue-500";
+        break;
+      default:
+        var icon = "ph-fill ph-question";
+    }
+
+    const dayTime = new Date(Number(day.date_epoch) * 1000);
+    return (
+      <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
+        <div class="flex items-center">
+          <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-default items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75">
+            <i class={`${icon} text-2xl`} aria-hidden="true"></i>
+          </button>
+          <div class="flex flex-col">
+            <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white capitalize">
+              {dayTime.toLocaleString("ru-Ru", { weekday: "long" })}
+            </h6>
+            <span class="leading-tight text-xs">
+              {dayTime.getDate()}{" "}
+              {dayTime.toLocaleString("ru-Ru", { month: "long" })}{" "}
+              {dayTime.getFullYear()}
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center ">
+          <p class="m-0 font-semibold leading-normal text-sm bg-clip-text">
+            {Math.round(day.day.avgtemp_c)}&#176;
+          </p>
+          <p class="m-0 font-semibold leading-normal text-xs bg-clip-text">
+            {day.day.condition.text}
+          </p>
+        </div>
+      </li>
+    );
+  });
   return (
     <div class="w-full max-w-full px-3 mt-6 md:w-4/12 md:flex-none">
       <div class="relative flex flex-col h-full min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
         <div class="p-6 px-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
           <div class="flex flex-wrap -mx-3">
             <div class="max-w-full px-3 md:w-1/2 md:flex-none">
-              <h6 class="mb-0 dark:text-white">Погода на неделю</h6>
+              <h6 class="mb-0 dark:text-white">Погода на 3 дня</h6>
             </div>
             <div class="flex items-center justify-end max-w-full px-3 md:w-1/2 md:flex-none">
               <i class="mr-2 ph ph-calendar-blank" aria-hidden="true"></i>
-              <small>10 - 17 мая 2023</small>
+              <small>
+                {new Date().getDate()} -{" "}
+                {new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).getDate()}{" "}
+                {new Date().toLocaleString("ru-Ru", { month: "long" })}{" "}
+                {new Date().getFullYear()}
+              </small>
             </div>
           </div>
         </div>
         <div class="flex-auto p-4 pt-6">
-          <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-            <li class="relative flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
-              <div class="flex items-center">
-                <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75">
-                  <i
-                    class="ph ph-sun text-2xl text-yellow-500"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-                <div class="flex flex-col">
-                  <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white">
-                    Среда
-                  </h6>
-                  <span class="leading-tight text-xs">10 мая 2023</span>
-                </div>
-              </div>
-              <div class="flex flex-col items-center justify-center">
-                <p class="relative z-10 inline-block m-0 font-semibold leading-normal  text-sm bg-clip-text">
-                  10°
-                </p>
-                <p class="relative z-10 inline-block m-0 font-semibold leading-normal text-xs bg-clip-text">
-                  Ясно
-                </p>
-              </div>
-            </li>
-          </ul>
+          <ul class="flex flex-col pl-0 mb-0 rounded-lg">{WeatherItems}</ul>
         </div>
       </div>
     </div>

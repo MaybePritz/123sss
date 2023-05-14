@@ -1,4 +1,4 @@
-import geoip from 'fast-geoip';
+import geodecodeIp from 'micro-geoip-lite';
 
 
 async function Forecast(place, date) {
@@ -9,37 +9,34 @@ async function Forecast(place, date) {
 }
 
 
-export default async function handler(req, res){
+export default async function handler(req, res) {
     const reqDate = req.query.date;
     const fetchDate = new Date(Number(reqDate) * 1000);
     const FormatDate = `${fetchDate.getFullYear()}-${fetchDate.getMonth() + 1}-${fetchDate.getDate()}`;
 
-    const ip = (req.connection.remoteAddress != '::1' && req.connection.remoteAddress != undefined ? req.connection.remoteAddres : '88.200.162.3');
-    const geo = await geoip.lookup(ip);
-    
-    const body = req.body
-    
-    if(body.place){
-        Forecast(body.place, FormatDate)
-        .then(data => {
-            delete data.forecast.forecastday[0].hour;
-            res.status(200).json(data.forecast.forecastday[0]);
-            res.end();
-        })
-        .catch(error => {
-            res.status(503).json(error);
-            res.end();
-        })
-    }else{
+    if (req.body.hasOwnProperty("place")) {
+        console.log('place');
+        Forecast(req.body.place, FormatDate)
+            .then(data => {
+                delete data.forecast.forecastday[0].hour;
+                res.status(200).json(data.forecast.forecastday[0]);
+                res.end();
+            })
+            .catch(error => {
+                res.status(503).json(error);
+                res.end();
+            })
+    } else {
+        const geo = await geodecodeIp();
         Forecast(`${geo.ll[0]},${geo.ll[1]}`, FormatDate)
-        .then(data => {
-            delete data.forecast.forecastday[0].hour;
-            res.status(200).json(data.forecast.forecastday[0]);
-            res.end();
-        })
-        .catch(error => {
-            res.status(503).json(error);
-            res.end();
-        })
+            .then(data => {
+                delete data.forecast.forecastday[0].hour;
+                res.status(200).json(data.forecast.forecastday[0]);
+                res.end();
+            })
+            .catch(error => {
+                res.status(503).json(error);
+                res.end();
+            })
     }
 }
