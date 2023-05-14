@@ -14,8 +14,8 @@ export default function Navbar({ data }) {
   const halderFixed = () => {
     setFixedPluginStatus(dispatch, !fixedStatus || false);
   };
-
-  if(!data) return <Navbar_Skeleton />
+  console.log(data);
+  if(JSON.stringify(data) === '{}') return <Navbar_Skeleton />;
 
   return (
     <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start">

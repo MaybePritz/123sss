@@ -1,6 +1,6 @@
 import Forecast_Skeleton from "../skeletons/forecasts/forecast";
 export default function Forecast({ data, place }) {
-if (!data) return <Forecast_Skeleton />;
+if (JSON.stringify(data) === '{}') return <Forecast_Skeleton />;
   switch (data.current.condition.code) {
     case 1000:
       var weather_2d_icon = "ph-fill ph-sun ";

@@ -16,7 +16,7 @@ import TempWeek_Skeleton from "../skeletons/forecasts/temp_week";
 
 export default function TempWeek({ data, place }) {
 
-  if(!data) return <TempWeek_Skeleton />;
+  if(JSON.stringify(data) === '{}') return <TempWeek_Skeleton />;
 
   Chart.register(
     CategoryScale,

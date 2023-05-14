@@ -1,6 +1,6 @@
 import WeekForecast_Skeleton from "../skeletons/forecasts/forecast_week";
 export default function WeekForecast({ data }) {
-if(!data) return <WeekForecast_Skeleton />;
+if(JSON.stringify(data) === '{}') return <WeekForecast_Skeleton />;
   const WeatherItems = data.forecast.forecastday.map((day) => {
     switch (day.day.condition.code) {
       case 1000:

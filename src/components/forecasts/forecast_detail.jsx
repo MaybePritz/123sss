@@ -6,7 +6,7 @@ export default function ForecastDetail({
   info,
   width,
 }) {
-  if(!data) return <ForecastDetail_Skeleton />;
+  if(JSON.stringify(data) === '{}') return <ForecastDetail_Skeleton />;
   return (
     <>
       <div
