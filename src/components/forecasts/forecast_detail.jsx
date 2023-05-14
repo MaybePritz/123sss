@@ -1,3 +1,4 @@
+import ForecastDetail_Skeleton from "../skeletons/forecasts/forecast_detail";
 export default function ForecastDetail({
   data,
   title,
@@ -5,7 +6,7 @@ export default function ForecastDetail({
   info,
   width,
 }) {
-  
+  if(!data) return <ForecastDetail_Skeleton />;
   return (
     <>
       <div

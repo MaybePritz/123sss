@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Chart,
   CategoryScale,
@@ -13,11 +12,11 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-export default function TempWeek({ data, place }) {
-  const [weather, setWeather] = useState(null);
-  const [weatherDate, setWeatherDate] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+import TempWeek_Skeleton from "../skeletons/forecasts/temp_week";
 
+export default function TempWeek({ data, place }) {
+
+  if(!data) return <TempWeek_Skeleton />;
 
   Chart.register(
     CategoryScale,

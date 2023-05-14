@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-
-export default function WeekForecast({ data, place }) {
-
+import WeekForecast_Skeleton from "../skeletons/forecasts/forecast_week";
+export default function WeekForecast({ data }) {
+if(!data) return <WeekForecast_Skeleton />;
   const WeatherItems = data.forecast.forecastday.map((day) => {
     switch (day.day.condition.code) {
       case 1000:
@@ -70,7 +69,7 @@ export default function WeekForecast({ data, place }) {
     }
 
     const dayTime = new Date(Number(day.date_epoch) * 1000);
-    
+
     return (
       <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
         <div class="flex items-center">
