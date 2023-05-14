@@ -1,5 +1,4 @@
 import Search from "../../ui/search";
-import NavbarAlert from "../../ui/NavbarAlert";
 import classNames from "classnames";
 
 export default function Navbar_Skeleton() {
@@ -27,10 +26,6 @@ export default function Navbar_Skeleton() {
         </nav>
 
         <div class="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-          <NavbarAlert>
-            Завтра +23&#176;, на 3&#176; теплее, чем сегодня. Слабый ветер 3-5
-            м/с
-          </NavbarAlert>
           <Search
             placeholder={"Найти город..."}
             classes={classNames(
