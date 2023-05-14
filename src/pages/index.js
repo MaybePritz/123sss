@@ -64,7 +64,6 @@ export async function getServerSideProps(context) {
                 "Content-Type": "application/json",
             },
         });
-        await delay(2000)
         const data = await res.json();
 
         return { props: { data } };
