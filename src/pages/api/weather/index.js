@@ -1,4 +1,5 @@
 import geodecodeIp from 'micro-geoip-lite';
+import requestIp from 'request-ip';
 
 async function Forecast(place) {
   const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${place}&days=7&lang=ru`;
@@ -28,7 +29,9 @@ export default async function handler(req, res) {
       })
       .catch(error => res.status(503).json(error))
   } else {
-    const geo = await geodecodeIp();
+    const clientIp = (requestIp.getClientIp(req) !== "::1" ? requestIp.getClientIp(req) : null);
+    console.log(clientIp); 
+    const geo = await geodecodeIp(clientIp);
     Forecast(`${geo.ll[0]},${geo.ll[1]}`)
       .then(data => {
         if (data) {

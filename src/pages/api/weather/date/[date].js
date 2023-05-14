@@ -1,5 +1,5 @@
 import geodecodeIp from 'micro-geoip-lite';
-
+import requestIp from 'request-ip';
 
 async function Forecast(place, date) {
     const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${place}&dt=${date}&lang=ru`;
@@ -27,7 +27,8 @@ export default async function handler(req, res) {
                 res.end();
             })
     } else {
-        const geo = await geodecodeIp();
+        const clientIp = (requestIp.getClientIp(req) !== "::1" ? requestIp.getClientIp(req) : null);
+        const geo = await geodecodeIp(clientIp);
         Forecast(`${geo.ll[0]},${geo.ll[1]}`, FormatDate)
             .then(data => {
                 delete data.forecast.forecastday[0].hour;
