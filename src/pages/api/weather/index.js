@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       })
       .catch(error => res.status(503).json(error))
   } else {
-    const clientIp = ((req.headers["x-real-ip"] !== "::1" && req.connection.remoteAddress !== "::1") ? requestIp.getClientIp(req) : null);
+    const clientIp = req.headers["x-real-ip"];
     console.log('IP >>' + clientIp); 
     const geo = await geodecodeIp(clientIp);
     Forecast(`${geo.ll[0]},${geo.ll[1]}`)
