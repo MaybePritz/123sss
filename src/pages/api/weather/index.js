@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
         if (clientIp) {
             console.log('IP >>' + clientIp);
-            const geo = await geodecodeIp(clientIp);
+            const geo = await geodecodeIp(clientIp || );
             Forecast(`${geo.ll[0]},${geo.ll[1]}`)
                 .then(data => {
                     if (data) {
