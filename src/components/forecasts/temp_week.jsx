@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Chart,
   CategoryScale,
@@ -14,9 +15,15 @@ import { Bar } from "react-chartjs-2";
 
 import TempWeek_Skeleton from "../skeletons/forecasts/temp_week";
 
-export default function TempWeek({ data, place }) {
+export default function TempWeek({ data }) {
+  const [isLoading, setIsloading] = useState(true);
+  useEffect(() => {
+    if(data) {
+      setIsloading(false)
+    };
+  }, []);
 
-  if(JSON.stringify(data) === '{}') return <TempWeek_Skeleton />;
+  if(isLoading) return <TempWeek_Skeleton />;
 
   Chart.register(
     CategoryScale,

@@ -5,19 +5,27 @@ import Navbar_Skeleton from "../skeletons/main/navbar";
 import Search from "../ui/search";
 import Breadcrumbs from "../ui/breadcrumbs";
 import classNames from "classnames";
+import { useEffect, useState } from "react";
 
 export default function Navbar({ data }) {
+  const [isLoading, setIsloading] = useState(true);
   const [controller, dispatch] = useAppController();
   const { fixedStatus, weatherAlert, sidebarStatus } = controller;
-
 
   const halderFixed = () => {
     setFixedPluginStatus(dispatch, !fixedStatus || false);
   };
-  console.log(data);
-  if(JSON.stringify(data) === '{}') return <Navbar_Skeleton />;
 
-  return (
+
+  useEffect(() => {
+    if(data) {
+      setIsloading(false)
+    };
+  }, []);
+
+  if(isLoading) return <Navbar_Skeleton />;
+
+   return (
     <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start">
       <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
         <Breadcrumbs

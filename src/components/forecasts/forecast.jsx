@@ -1,6 +1,17 @@
+import { useEffect, useState } from "react";
 import Forecast_Skeleton from "../skeletons/forecasts/forecast";
+
 export default function Forecast({ data, place }) {
-if (JSON.stringify(data) === '{}') return <Forecast_Skeleton />;
+  const [isLoading, setIsloading] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      setIsloading(false)
+    };
+  }, []);
+
+  if (isLoading) return <Forecast_Skeleton />;
+
   switch (data.current.condition.code) {
     case 1000:
       var weather_2d_icon = "ph-fill ph-sun ";

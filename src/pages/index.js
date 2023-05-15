@@ -15,8 +15,7 @@ import TempWeek from "@/components/forecasts/temp_week";
 //Skeletons
 import Forecast_Skeleton from '@/components/skeletons/forecasts/forecast';
 
-function Page({ data }) {
-    console.log(data);
+function Home({ data }) {
     return (
         <WeatherLayout>
             <Navbar data={data} />
@@ -32,9 +31,9 @@ function Page({ data }) {
                 </Suspense>
                     <div class="w-full max-w-full px-3 mt-6 ml-auto xl:flex-0 shrink-0 md:mt-0 xl:w-8/12">
                         <div class="flex flex-wrap mt-6 -mx-3">
-                            <ForecastDetail width={'4/12'} title={'По ощущению'} subtitle={'Градусы цельсия'} info={'feelslike_c'} data={data} />
-                            <ForecastDetail width={'4/12'} title={'Влажность'} subtitle={'Проценты'} info={'humidity'} data={data} />
-                            <ForecastDetail width={'4/12'} title={'Скорость ветра'} subtitle={'м/c'} info={'wind_kph'} data={data} />
+                            <ForecastDetail width={'4/12'} title={'По ощущению'} subtitle={'Градусы цельсия'} info={'feelslike_c'} data={ data } />
+                            <ForecastDetail width={'4/12'} title={'Влажность'} subtitle={'Проценты'} info={'humidity'} data={ data } />
+                            <ForecastDetail width={'4/12'} title={'Скорость ветра'} subtitle={'м/c'} info={'wind_kph'} data={ data } />
                         </div>
                         <div class="flex flex-wrap mt-0 md:mt-6 -mx-3">
                             <ForecastDetail width={"1/2"} title={'Восход солнца'} data={data} />
@@ -63,12 +62,11 @@ export async function getServerSideProps(context) {
                 "Content-Type": "application/json",
             },
         });
-
         const data = await res.json();
 
         return { props: { data } };
     }
 }
 
-export default Page;
+export default Home;
 

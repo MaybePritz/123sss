@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import WeekForecast_Skeleton from "../skeletons/forecasts/forecast_week";
 export default function WeekForecast({ data }) {
-if(JSON.stringify(data) === '{}') return <WeekForecast_Skeleton />;
+  const [isLoading, setIsloading] = useState(true);
+  
+  useEffect(() => {
+    if (data) {
+      setIsloading(false);
+    };
+  }, []);
+
+  if (isLoading) return <WeekForecast_Skeleton />;
+
   const WeatherItems = data.forecast.forecastday.map((day) => {
     switch (day.day.condition.code) {
       case 1000:
@@ -71,7 +81,7 @@ if(JSON.stringify(data) === '{}') return <WeekForecast_Skeleton />;
     const dayTime = new Date(Number(day.date_epoch) * 1000);
 
     return (
-      <li class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
+      <li key={day.date} class="flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
         <div class="flex items-center">
           <button class="leading-pro ease-soft-in bg-150 w-6 h-6 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-default items-center justify-center text-center align-middle font-bold uppercase transition-all hover:opacity-75">
             <i class={`${icon} text-2xl`} aria-hidden="true"></i>

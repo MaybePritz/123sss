@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import ForecastDetail_Skeleton from "../skeletons/forecasts/forecast_detail";
+
 export default function ForecastDetail({
   data,
   title,
@@ -6,7 +8,15 @@ export default function ForecastDetail({
   info,
   width,
 }) {
-  if(JSON.stringify(data) === '{}') return <ForecastDetail_Skeleton />;
+  const [isLoading, setIsloading] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      setIsloading(false)
+    };
+  }, []);
+
+  if (isLoading) return <ForecastDetail_Skeleton />;
   return (
     <>
       <div
