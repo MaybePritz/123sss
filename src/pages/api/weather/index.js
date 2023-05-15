@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       })
       .catch(error => res.status(503).json(error))
   } else {
-    const clientIp = '95.67.214.248';
+    const clientIp = req.headers["x-forwarded-for"] ? req.headers["x-forwarded-for"].split(/, /)[0] : req.connection.remoteAddress
     console.log('IP >>' + clientIp); 
     const geo = await geodecodeIp(clientIp);
     Forecast(`${geo.ll[0]},${geo.ll[1]}`)
