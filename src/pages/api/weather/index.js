@@ -30,15 +30,17 @@ export default async function handler(req, res) {
       .catch(error => res.status(503).json(error))
   } else {
     let clientIp = req.headers["x-real-ip"];
-  if (!clientIp) {
-    const forwardedFor = req.headers["x-forwarded-for"];
-    if (Array.isArray(forwardedFor)) {
-      let clientIp = forwardedFor.at(0);
-    } else {
-      let clientIp = forwardedFor?.split(",").at(0) ?? "Unknown";
+    if (!clientIp) {
+      const forwardedFor = req.headers["x-forwarded-for"];
+      if (Array.isArray(forwardedFor)) {
+        let clientIp = forwardedFor.at(0);
+      } else {
+        let clientIp = forwardedFor?.split(",").at(0) ?? "Unknown";
+      }
     }
-  }
-    console.log('IP >>' + clientIp); 
+    
+    if(clientIp) {
+      console.log('IP >>' + clientIp); 
     const geo = await geodecodeIp(clientIp);
     Forecast(`${geo.ll[0]},${geo.ll[1]}`)
       .then(data => {
@@ -53,7 +55,7 @@ export default async function handler(req, res) {
             res.end();
           }
         }
-      })
-  };
+    }})
+};
 
 }
