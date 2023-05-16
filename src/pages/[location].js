@@ -68,6 +68,7 @@ export async function getServerSideProps(context) {
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({ location: 'Самара' })
         });
         const data = await res.json();
 
