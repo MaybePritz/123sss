@@ -63,18 +63,18 @@ export async function getServerSideProps(context) {
     }
 
     if (req.headers.host) {
-            const res = await fetch('http://' + req.headers.host + `/api/weather`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                location: 'kirov',
-              })
-            });
-            const data = await res.json();
-          
-            return { props: { data } };
+        const body = JSON.stringify({ location: 'Самара' });
+        const res = await fetch('http://' + req.headers.host + `/api/weather`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Content-Length': Buffer.byteLength(body),
+            },
+            body: body
+        });
+        const data = await res.json();
+
+        return { props: { data } };
     }
 }
 
