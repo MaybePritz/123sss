@@ -70,7 +70,7 @@ export async function getServerSideProps(context) {
                 "Content-Type": "application/json",
                 'Content-Length': body.length.toString(),
             },
-            body: body;
+            body: body
         });
         const data = await res.json();
 
