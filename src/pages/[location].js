@@ -63,7 +63,6 @@ export async function getServerSideProps(context) {
     }
 
     if (req.headers.host) {
-        console.log(req.headers.host);
         const res = await fetch('http://' + req.headers.host + `/api/weather`, {
             method: "POST",
             headers: {

@@ -12,7 +12,7 @@ async function Forecast(place) {
 
 export default async function handler(req, res) {
     if (req.body.hasOwnProperty("location")) {
-        console.log('Location:' + req.body.location);
+        console.log('Location:  ' + req.body.location);
         Forecast(req.body.location)
             .then(data => {
                 if (data) {
@@ -29,33 +29,21 @@ export default async function handler(req, res) {
             })
             .catch(error => res.status(503).json(error))
     } else {
-        let clientIp = req.headers["x-real-ip"];
-        if (!clientIp) {
-            const forwardedFor = req.headers["x-forwarded-for"];
-            if (Array.isArray(forwardedFor)) {
-                let clientIp = forwardedFor.at(0);
-            } else {
-                let clientIp = forwardedFor?.split(",").at(0) ?? "Unknown";
-            }
-        }
-
-        if (clientIp) {
-            console.log('IP >>' + clientIp);
-            const geo = await geodecodeIp(clientIp || '178.176.161.255');
-            Forecast(`${geo.ll[0]},${geo.ll[1]}`)
-                .then(data => {
-                    if (data) {
-                        if (res.headersSent !== true) {
-                            res.status(200).json(data);
-                            res.end();
-                        }
-                    } else {
-                        if (res.headersSent !== true) {
-                            res.status(503);
-                            res.end();
-                        }
+        const clientIp = (requestIp.getClientIp(req) !== "::1" ? requestIp.getClientIp(req) : null);
+        const geo = await geodecodeIp(clientIp);
+        Forecast(`${geo.ll[0]},${geo.ll[1]}`)
+            .then(data => {
+                if (data) {
+                    if (res.headersSent !== true) {
+                        res.status(200).json(data);
+                        res.end();
                     }
-                })
-        }
+                } else {
+                    if (res.headersSent !== true) {
+                        res.status(503);
+                        res.end();
+                    }
+                }
+            })
     }
 }
