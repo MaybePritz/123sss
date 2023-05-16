@@ -29,7 +29,7 @@ export default async function handler(req, res) {
             })
             .catch(error => res.status(503).json(error))
     } else {
-        const clientIp = '89.223.105.233';
+        const clientIp = '178.176.163.87';
         const geo = await geodecodeIp(clientIp);
         Forecast(`${geo.ll[0]},${geo.ll[1]}`)
             .then(data => {
