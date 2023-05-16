@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
     }
 
     if (req.headers.host) {
-        const body = JSON.stringify({ location: 'Самара' });
+        const body = JSON.stringify({ location: context.params.location });
         const res = await fetch('http://' + req.headers.host + `/api/weather`, {
             method: "POST",
             headers: {
