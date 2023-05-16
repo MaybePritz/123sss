@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import fetch from 'isomorphic-unfetch';
 //Main components
 import WeatherLayout from "@/layouts/Weather";
 import Navbar from "@/components/main/navbar";
