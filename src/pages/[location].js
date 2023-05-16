@@ -67,6 +67,7 @@ export async function getServerSideProps(context) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                'Content-Length': JSON.stringify({ location: context.params.location}).length.toString(),
             },
             body : JSON.stringify({ location: context.params.location}),
         });
