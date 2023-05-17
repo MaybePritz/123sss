@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import fetch from 'node-fetch';
 //Main components
 import WeatherLayout from "@/layouts/Weather";
@@ -10,6 +9,7 @@ import FixedPlugin from "@/components/main/fixed_plugin";
 import SMForecast from "@/components/forecasts/forecast_sm";
 import Forecast from "@/components/forecasts/forecast";
 import ForecastDetail from "@/components/forecasts/forecast_detail";
+import ForecastDetail2 from "@/components/forecasts/forecast_detail_2";
 import WeekForecast from "@/components/forecasts/forecast_week";
 import TempWeek from "@/components/forecasts/temp_week";
 
@@ -27,9 +27,7 @@ function Home({ data }) {
                     <SMForecast title={'Суббота'} date={Math.floor(new Date().getTime() / 1000.0) + 3 * 24 * 60 * 60} />
                 </div>
                 <div className="flex flex-wrap lg:flex-nowrap mt-6 md:mt-0">
-                <Suspense fallback={<Forecast_Skeleton />}>
                     <Forecast data={data} />
-                </Suspense>
                     <div class="w-full max-w-full px-3 mt-6 ml-auto xl:flex-0 shrink-0 md:mt-0 xl:w-8/12">
                         <div class="flex flex-wrap mt-6 -mx-3">
                             <ForecastDetail width={'4/12'} title={'По ощущению'} subtitle={'Градусы цельсия'} info={'feelslike_c'} data={ data } />
@@ -37,8 +35,8 @@ function Home({ data }) {
                             <ForecastDetail width={'4/12'} title={'Скорость ветра'} subtitle={'м/c'} info={'wind_kph'} data={ data } />
                         </div>
                         <div class="flex flex-wrap mt-0 md:mt-6 -mx-3">
-                            <ForecastDetail width={"1/2"} title={'Восход солнца'} info={'04:38'} data={data} />
-                            <ForecastDetail width={'1/2'} title={'Заход солнца'} info={'20:38'} data={data} />
+                            <ForecastDetail2 width={"1/2"} title={'Восход солнца'} info={'sunrise'} data={data} />
+                            <ForecastDetail2 width={'1/2'} title={'Заход солнца'} info={'sunset'} data={data} />
                         </div>
                     </div>
                 </div>
