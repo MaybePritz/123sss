@@ -9,6 +9,7 @@ import FixedPlugin from "@/components/main/fixed_plugin";
 //Import weather Components
 import SMForecast from "@/components/forecasts/forecast_sm";
 import Forecast from "@/components/forecasts/forecast";
+import ForecastDetail2 from "@/components/forecasts/forecast_detail_2";
 import ForecastDetail from "@/components/forecasts/forecast_detail";
 import WeekForecast from "@/components/forecasts/forecast_week";
 import TempWeek from "@/components/forecasts/temp_week";
@@ -37,8 +38,8 @@ function Home({ data }) {
                             <ForecastDetail width={'4/12'} title={'Скорость ветра'} subtitle={'м/c'} info={'wind_kph'} data={data}/>
                         </div>
                         <div class="flex flex-wrap mt-0 md:mt-6 -mx-3">
-                            <ForecastDetail width={"1/2"} title={'Восход солнца'} info={'Нет данных'} data={data}/>
-                            <ForecastDetail width={'1/2'} title={'Заход солнца'} info={'Нет данных'} data={data}/>
+                            <ForecastDetail2 width={"1/2"} title={'Восход солнца'} info={'sunrise'} data={data}/>
+                            <ForecastDetail2 width={'1/2'} title={'Заход солнца'} info={'sunset'} data={data}/>
                         </div>
                     </div>
                 </div>
