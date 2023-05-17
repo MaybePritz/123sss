@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import fetch from 'node-fetch';
 //Main components
 import WeatherLayout from "@/layouts/Weather";
 import Navbar from "@/components/main/navbar";
@@ -36,8 +37,8 @@ function Home({ data }) {
                             <ForecastDetail width={'4/12'} title={'Скорость ветра'} subtitle={'м/c'} info={'wind_kph'} data={data}/>
                         </div>
                         <div class="flex flex-wrap mt-0 md:mt-6 -mx-3">
-                            <ForecastDetail width={"1/2"} title={'Восход солнца'} data={data}/>
-                            <ForecastDetail width={'1/2'} title={'Заход солнца'} data={data}/>
+                            <ForecastDetail width={"1/2"} title={'Восход солнца'} info={'Нет данных'} data={data}/>
+                            <ForecastDetail width={'1/2'} title={'Заход солнца'} info={'Нет данных'} data={data}/>
                         </div>
                     </div>
                 </div>
@@ -66,11 +67,11 @@ export async function getServerSideProps(context) {
         const body = JSON.stringify({ location: context.params.location });
         const res = await fetch('http://' + req.headers.host + `/api/weather`, {
             method: "POST",
+            body: body,
             headers: {
                 "Content-Type": "application/json",
                 'Content-Length': Buffer.byteLength(body),
             },
-            body: body
         });
         const data = await res.json();
 

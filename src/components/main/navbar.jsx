@@ -46,41 +46,6 @@ export default function Navbar({ data }) {
               { "md:w-1/2": weatherAlert }
             )}
           />
-          <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-            <li class="flex items-center">
-              <a
-                href="#"
-                class="opacity-50 pointer-events-none flex items-center px-0 py-2 font-semibold transition-all ease-nav-brand text-md text-slate-500"
-              >
-                <i class="ph-fill ph-user mr-1"></i>
-                <span class=" sm:inline">Вход</span>
-              </a>
-            </li>
-            <li
-              class={`flex items-center pl-4 ${
-                sidebarStatus ? "xl:hidden" : "hidden"
-              }`}
-            >
-              <a
-                href="javascript:;"
-                class="block p-0 transition-all ease-nav-brand text-sm text-slate-500"
-              >
-                <div class="w-4.5 overflow-hidden">
-                  <i class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                  <i class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                  <i class="ease-soft relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                </div>
-              </a>
-            </li>
-            <li class="flex items-center px-4">
-              <button
-                onClick={halderFixed}
-                class="p-0 transition-all text-md ease-nav-brand text-slate-500 opacity-50 pointer-events-none"
-              >
-                <i class="ph-fill ph-gear-six"></i>
-              </button>
-            </li> 
-          </ul>
         </div>
       </div>
     </nav>
